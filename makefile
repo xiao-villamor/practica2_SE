@@ -6,7 +6,7 @@ COMMONFLAGS=-g3 -Og -Wall -Werror $(ARCHFLAGS)
 
 
 CFLAGS=-I./includes/  -DCPU_MKL46Z256VLH4 $(COMMONFLAGS) 
-LDFLAGS=$(COMMONFLAGS) --specs=nano.specs  -Wl,--gc-sections,-Map,$(TARGET).map, -T link.ld 
+LDFLAGS=$(COMMONFLAGS) -T link.ld  --specs=nano.specs  -Wl,--gc-sections,-Map,$(TARGET).map
 LDLIBS= 
 
 CC=$(PREFIX)gcc
@@ -21,9 +21,11 @@ TARGET2=hello_world
 
 
 SRC=$(wildcard led_blinky.c startup.c pin_mux_b.c drivers/*.c)
+
 SRC2=$(wildcard hello_world.c startup.c pin_mux_h.c drivers/*.c)
 
 OBJ=$(patsubst %.c, %.o, $(SRC))
+
 OBJ2=$(patsubst %.c, %.o, $(SRC2))
 
 hello_world : build_h size_h
@@ -41,10 +43,10 @@ elf: $(TARGET).elf
 srec: $(TARGET).srec
 bin: $(TARGET).bin
 
-clean_led_blink:
+clean_led:
 	$(RM) $(TARGET).srec $(TARGET).elf $(TARGET).bin $(TARGET).map $(OBJ)
 
-clean_hello_world:
+clean_hello:
 	$(RM) $(TARGET2).srec $(TARGET2).elf $(TARGET2).bin $(TARGET2).map $(OBJ2)
 
 
@@ -62,6 +64,7 @@ $(TARGET2).elf: $(OBJ2)
 
 size:
 	$(SIZE) $(TARGET).elf
+
 
 flash_hello : hello_world
 	openocd -f openocd.cfg -c "program $(TARGET2).elf verify reset exit"
