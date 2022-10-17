@@ -147,7 +147,8 @@ void (* const g_pfnVectors[])(void) =
 //*****************************************************************************
 void Default_ResetHandler(void)
 {
-  SystemInit();
+  //SystemInit();
+  *((volatile unsigned int *)0x40048100) = 0x00u;
   unsigned long *pulSrc, *pulDest;
 
   /* copy the data segment initializers from flash to SRAM */

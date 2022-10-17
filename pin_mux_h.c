@@ -48,7 +48,7 @@ board: FRDM-KL46Z
 
 #include "fsl_common.h"
 #include "fsl_port.h"
-#include "pin_mux.h"
+#include "pin_mux_h.h"
 
 
 

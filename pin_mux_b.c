@@ -44,7 +44,7 @@ processor_version: 2.0.0
 
 #include "fsl_common.h"
 #include "fsl_port.h"
-#include "pin_mux.h"
+#include "pin_mux_b.h"
 
 /*FUNCTION**********************************************************************
  * 

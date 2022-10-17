@@ -30,13 +30,11 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#include <stdlib.h>
-#include <stdio.h> 
+
 #include "board.h"
 #include "fsl_gpio.h"
 
-
-#include "pin_mux.h"
+#include "pin_mux_b.h"
 /*******************************************************************************
  * Definitions
  ******************************************************************************/

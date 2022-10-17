@@ -1,12 +1,11 @@
 /*
  * The Clear BSD License
- * Copyright (c) 2013 - 2015, Freescale Semiconductor, Inc.
- * Copyright 2016-2017 NXP
+ * Copyright 2017 NXP
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted (subject to the limitations in the disclaimer below) provided
- *  that the following conditions are met:
+ * that the following conditions are met:
  *
  * o Redistributions of source code must retain the above copyright notice, this list
  *   of conditions and the following disclaimer.
@@ -32,40 +31,56 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "fsl_device_registers.h"
-#include "fsl_debug_console.h"
-#include "board.h"
+#ifndef _PIN_MUX_H_
+#define _PIN_MUX_H_
 
-#include "pin_mux_h.h"
+
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
 
-
-/*******************************************************************************
- * Prototypes
- ******************************************************************************/
-
-/*******************************************************************************
- * Code
- ******************************************************************************/
-/*!
- * @brief Main function
- */
-int main(void)
+/*! @brief Direction type  */
+typedef enum _pin_mux_direction
 {
-    char ch;
+  kPIN_MUX_DirectionInput = 0U,         /* Input direction */
+  kPIN_MUX_DirectionOutput = 1U,        /* Output direction */
+  kPIN_MUX_DirectionInputOrOutput = 2U  /* Input or output direction */
+} pin_mux_direction_t;
 
-    /* Init board hardware. */
-    BOARD_InitPins();
-    BOARD_BootClockRUN();
-    BOARD_InitDebugConsole();
+/*!
+ * @addtogroup pin_mux
+ * @{
+ */
 
-    PRINTF("hello world.\r\n");
+/*******************************************************************************
+ * API
+ ******************************************************************************/
 
-    while (1)
-    {
-        ch = GETCHAR();
-        PUTCHAR(ch);
-    }
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
+/*!
+ * @brief Calls initialization functions.
+ *
+ */
+void BOARD_InitBootPins(void);
+
+
+/*!
+ *
+ */
+void BOARD_InitPins(void);
+
+#if defined(__cplusplus)
 }
+#endif
+
+/*!
+ * @}
+ */
+#endif /* _PIN_MUX_H_ */
+
+/*******************************************************************************
+ * EOF
+ ******************************************************************************/
